@@ -11,60 +11,60 @@ h2. Installation
 Install the "Paperclipped Extension":http://github.com/kbingman/paperclipped/ before the Asset Gallery Extension:
 
 <pre>
-  git clone http://github.com/kbingman/paperclipped.git vendor/extensions/paperclipped
+git clone http://github.com/kbingman/paperclipped.git vendor/extensions/paperclipped
   
-  rake production db:migrate:extensions
-  rake production radiant:extensions:paperclipped:update
+rake production db:migrate:extensions
+rake production radiant:extensions:paperclipped:update
 </pre>
 
 Now install the Asset Gallery Extension:
 
 <pre>
-  git clone http://github.com/jfqd/radiant-asset_gallery-extension vendor/extensions/asset_gallery
+git clone http://github.com/jfqd/radiant-asset_gallery-extension vendor/extensions/asset_gallery
   
-  rake production db:migrate:extensions
-  rake production radiant:extensions:asset_gallery:update
+rake production db:migrate:extensions
+rake production radiant:extensions:asset_gallery:update
 </pre>
 
 Be careful about the extensions load order:
 
-config.extensions = [ :paperclipped, :all ]
+<pre>config.extensions = [ :paperclipped, :all ]</pre>
 
 h2. Tag Examples
 
 h3. List of galleries
 
-<pre><code>
+<pre>
 <r:gallery:each>
   <div>
     <div><r:gallery:first_image size="thumbnail" />
     <div><r:gallery:name /></div>
   </div>
 </r:gallery:each>
-</code></pre>
+</pre>
 
 h3. Images of a gallery with caption
 
-<pre><code>
+<pre>
 <r:gallery:items name="my-gallery">
   <div class="slide">
     <r:gallery_item:image size="normal" />
     <p><r:gallery_item:caption /></p>
   </div>
 </r:gallery:items>
-</code></pre>
+</pre>
 
 h2. Compatibility
 
 This extension is compatible with the "Globalize2-Paperclipped Extension":http://github.com/Aissac/radiant-globalize2-paperclipped-extension. You need to install the Globalize2-Paperclipped Extension before the Asset Gallery Extension.
 
 <pre>
-  git clone http://github.com/Aissac/radiant-globalize2-paperclipped-extension.git vendor/extensions/globalize2_paperclipped
+git clone http://github.com/Aissac/radiant-globalize2-paperclipped-extension.git vendor/extensions/globalize2_paperclipped
 </pre>
-  
+
 Be careful about the extensions load order:
 
-config.extensions = [ :paperclipped, :globalize2, :globalize2_paperclipped, :all ]
+<pre>config.extensions = [ :paperclipped, :globalize2, :globalize2_paperclipped, :all ]</pre>
 
 h2. Contributors
 
