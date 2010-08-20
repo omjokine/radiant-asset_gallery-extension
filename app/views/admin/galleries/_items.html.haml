@@ -1,0 +1,5 @@
+- items.each do |item|
+  %li.asset-list-item{:id => "gallery_item_#{item.asset.id}"}
+    = image_tag(item.asset.thumbnail(:thumbnail), :alt => item.asset.asset_file_name, :title => item.asset.title)
+    %span= h item.asset.title[0..75]
+    %span.delete

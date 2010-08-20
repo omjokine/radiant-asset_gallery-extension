@@ -1,0 +1,25 @@
+- @stylesheets << 'admin/gallery'
+
+%h1= 'New Gallery'
+
+- form_for [:admin, @gallery], :html => {:multipart => true} do |f|
+  .form-area
+    %p.title
+      %label Title
+      = f.text_field :name, :class => 'textbox'
+    .drawer
+      .drawer_contents#attributes
+        %table.fieldset
+          %tr
+            %th.label
+              %label Description
+            %td.field= f.text_area :caption, :class => 'textarea'
+      .drawer_handle
+        %a.toggle{:href=>'#attributes', :rel=>"toggle[attributes]", :class=>"#{(meta_errors? ? 'less' : 'more')}"}= meta_label
+    %p#note= "First create a gallery, in the next step add pictures to it."
+     
+  %p.buttons#submit_buttons
+    - button_text = @gallery.new_record? ? 'Create' : 'Save Changes'
+    = submit_tag button_text, :class => 'button'
+    or
+    = link_to 'Cancel', admin_galleries_url

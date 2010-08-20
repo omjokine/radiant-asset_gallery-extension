@@ -1,0 +1,72 @@
+h1. Asset Gallery
+
+This extension allows you to create galleries of Paperclipped Assets. Provides an admin interface to add, sort and remove assets from a Gallery with drag and drop, and radius tags to easily include the Galleries in your site.
+
+("sbmsuite":http://github.com/sbmsuite) modified the views from zapnap/radiant-flash-gallery-extension to use in the new extension. However THIS IS NOT A FORK. It is a newly created extension. "jfqd":http://github.com/jfqd modified the extension to support ujs drag and drop and globalize2-paperclipped compatibility.
+
+Tested with radiant 0.9.1
+
+h2. Installation
+
+Install the "Paperclipped Extension":http://github.com/kbingman/paperclipped/ before the Asset Gallery Extension:
+
+<pre>
+  git clone http://github.com/kbingman/paperclipped.git vendor/extensions/paperclipped
+  
+  rake production db:migrate:extensions
+  rake production radiant:extensions:paperclipped:update
+</pre>
+
+Now install the Asset Gallery Extension:
+
+<pre>
+  git clone http://github.com/jfqd/radiant-asset_gallery-extension vendor/extensions/asset_gallery
+  
+  rake production db:migrate:extensions
+  rake production radiant:extensions:asset_gallery:update
+</pre>
+
+Be careful about the extensions load order:
+
+config.extensions = [ :paperclipped, :all ]
+
+h2. Tag Examples
+
+h3. List of galleries
+
+<pre><code>
+<r:gallery:each>
+  <div>
+    <div><r:gallery:first_image size="thumbnail" />
+    <div><r:gallery:name /></div>
+  </div>
+</r:gallery:each>
+</code></pre>
+
+h3. Images of a gallery with caption
+
+<pre><code>
+<r:gallery:items name="my-gallery">
+  <div class="slide">
+    <r:gallery_item:image size="normal" />
+    <p><r:gallery_item:caption /></p>
+  </div>
+</r:gallery:items>
+</code></pre>
+
+h2. Compatibility
+
+This extension is compatible with the "Globalize2-Paperclipped Extension":http://github.com/Aissac/radiant-globalize2-paperclipped-extension. You need to install the Globalize2-Paperclipped Extension before the Asset Gallery Extension.
+
+<pre>
+  git clone http://github.com/Aissac/radiant-globalize2-paperclipped-extension.git vendor/extensions/globalize2_paperclipped
+</pre>
+  
+Be careful about the extensions load order:
+
+config.extensions = [ :paperclipped, :globalize2, :globalize2_paperclipped, :all ]
+
+h2. Contributors
+
+"sbmsuite":http://github.com/sbmsuite
+"jfqd":http://github.com/jfqd

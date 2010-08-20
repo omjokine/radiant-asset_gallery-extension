@@ -1,27 +1,34 @@
-# Uncomment this if you reference any of your controllers in activate
-# require_dependency 'application_controller'
-require_dependency "#{File.expand_path(File.dirname(__FILE__))}/lib/model_extensions/user_model_extension"
-require_dependency "#{File.expand_path(File.dirname(__FILE__))}/lib/model_extensions/asset_model_extension"
-
 class AssetGalleryExtension < Radiant::Extension
-  version "1.0"
-  description "Describe your extension here"
-  url "http://yourwebsite.com/asset_gallery"
+  version "1.1"
+  description "Create galleries with images uploaded by paperclipped_extension"
+  url "http://github.com/jfqd/radiant-asset_gallery-extension"
   
   define_routes do |map|
-    map.namespace :admin, :member => { :remove => :get } do |admin|
+    map.namespace :admin, :member => { :remove => :get, :search => :get } do |admin|
       admin.resources :galleries
+      
+      admin.resources :galleries do |gallery|
+        gallery.items_sort 'items/sort.:format', :controller => 'gallery_items', :action => 'sort', :conditions => { :method => :put }
+        gallery.resources :items, :controller => 'gallery_items', :only => [ :create, :destroy ]
+      end
+      
     end
   end
   
   def activate
-    # admin.nav[:content] << admin.nav_item(:asset_gallery, "Asset Gallery", "/admin/asset_gallery"), :after => :pages
-  
-    admin.nav[:content] << admin.nav_item(:galleries, "Gallery", "/admin/galleries")
+    tab 'Content' do
+      add_item 'Gallery', '/admin/galleries', :after => 'Assets'
+    end
 
     Page.send :include, GalleryTags
-
-    User.send(:include, AssetGallery::UserModelExtension)
-    Asset.send(:include, AssetGallery::AssetModelExtension)
+    User.send :include, AssetGallery::UserModelExtension
+    
+    # compatibility with globalize2_paperclipped
+    if defined?(Globalize2PaperclippedExtension)
+      Asset.send :include, AssetGallery::GlobalizedAssetModelExtension
+    else
+      Asset.send :include, AssetGallery::PaperclippedAssetModelExtension
+    end
+    
   end
 end

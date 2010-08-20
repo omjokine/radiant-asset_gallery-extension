@@ -1,0 +1,85 @@
+form.edit_gallery
+  clear: both
+  display: block
+  
+  #gallery_panel
+    float: left
+    width: 60%
+  #assets_panel
+    float: right
+    width: 38%
+
+    #asset-selection
+      display: block
+      p
+        margin-right: 0
+        padding-right: 0
+      label
+        display: inline
+        float: left
+      span
+        float: right
+        margin: -6px 0 4px 10px
+
+#gallery_items
+  height: 500px
+#asset_items
+  height: 610px
+  .delete
+    display: none
+#gallery_items.hover
+  background: #ffff99
+
+.note
+  clear: both
+
+#content .form-area div.error-with-field
+  input.textbox
+    font-family: Georgia,Palatino,"Times New Roman",Times,serif
+    font-size: 200%
+
+textarea.textarea
+  height: 50px !important
+  display: block
+
+img.asset
+  margin: 5px 0
+  border: 2px solid #fff
+
+a.asset
+  display: block
+  margin: 5px 0
+
+.asset-list-container
+  clear: both
+  overflow: auto
+  background-color: white
+  padding: 10px
+  display: block
+
+.asset-list-item
+  background-color: white
+  text-align: center
+  line-height: 12px
+  color: #222
+  font-size: 9px
+  border: 1px solid #ccc
+  margin: 2px
+  padding: 2px
+  width: 110px
+  height: 150px
+  display: inline
+  float: left
+  position: relative
+  cursor: pointer
+  img
+    margin-bottom: 2px
+  .delete
+    background: url('/images/admin/minus.png')
+    display: block
+    width: 12px
+    height: 12px
+    z-index: 100
+    position: absolute
+    left: 95px
+    top: 135px

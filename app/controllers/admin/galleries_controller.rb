@@ -6,26 +6,25 @@ class Admin::GalleriesController < ApplicationController
 
   def new
     @gallery = Gallery.new
-    render(:action => 'edit')
   end
 
   def edit
     @gallery = Gallery.find(params[:id])
-    render(:action => 'edit')
+    if @gallery
+      @items  = @gallery.gallery_items
+      @assets = Asset.quick_search("",@items)
+      render(:action => 'edit')
+    else
+      redirect_to(admin_gallery_path)
+    end
   end
 
   def create
     params[:gallery][:user_id] = current_user.id
-    @gallery = Gallery.new(params[:gallery])    
+    @gallery = Gallery.new(params[:gallery])
     if @gallery.save
-      checked = params[:checked]
-      checked.each do |id, selected|
-        if selected == 1.to_s
-          @gallery.gallery_items.create(:asset_id => id)
-        end
-      end
       flash[:notice] = "Successfully added a new gallery."
-      redirect_to(admin_galleries_path)
+      redirect_to(edit_admin_gallery_path(@gallery.id))
     else
       flash[:error] = "Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing."
       render(:action => 'edit')
@@ -35,17 +34,6 @@ class Admin::GalleriesController < ApplicationController
   def update
     @gallery = Gallery.find(params[:id])
     if @gallery.update_attributes(params[:gallery])
-      @gallery.gallery_items.clear
-      checked = params[:checked]
-      checked.each do |id, selected|
-        if selected == 1.to_s
-          if @gallery.gallery_items.exists?(:asset_id => id)
-            next
-          else
-            @gallery.gallery_items.create(:asset_id => id)
-          end
-        end
-      end      
       flash[:notice] = "Successfully updated the gallery details."
       redirect_to(admin_galleries_path)
     else
@@ -62,4 +50,20 @@ class Admin::GalleriesController < ApplicationController
     redirect_to(admin_galleries_path)
   end
 
+  # search assets
+  def search
+    gallery = Gallery.find(params[:id])
+    items   = gallery.gallery_items # remove items from assets view!
+    @assets = Asset.quick_search(params[:search], items)
+    respond_to do |format|
+      format.html { render :layout => false }
+      format.js {
+        render :update do |page|
+          page.replace_html "asset_items", :partial => 'admin/galleries/assets.html.haml', :locals => { :assets => @assets }
+          page << 'Asset.MakeDraggables();'
+        end
+      }
+    end
+  end
+  
 end

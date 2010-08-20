@@ -34,7 +34,10 @@ module GalleryTags
   tag 'gallery:first_image' do |tag|
 	  attr = tag.attr.symbolize_keys
     gallery= tag.locals.gallery
-    %{<img src="#{gallery.gallery_items.first.asset.thumbnail(attr[:size])}" alt="#{gallery.caption}" class=""  />}
+    gallery_item = gallery.gallery_items.first
+    item_title   = html_escape(gallery_item.asset.title ? gallery_item.asset.title : "")
+    item_caption = html_escape(gallery_item.asset.caption ? gallery_item.asset.caption : "")
+    %{<img src="#{gallery_item.first.asset.thumbnail(attr[:size])}" alt="#{item_title}" title="#{item_caption}" />}
   end
 
   # gallery:items
@@ -69,7 +72,15 @@ module GalleryTags
   desc "Current gallery_item name"
   tag 'gallery_item:name' do |tag|
     gallery_item = tag.locals.gallery_item
-    html_escape gallery_item.asset.title ? gallery_item.asset.title : "none"
+    html_escape gallery_item.asset.title ? gallery_item.asset.title : ""
+  end
+
+  # gallery_item:caption
+  #----------------------------------------------------------------------------
+  desc "Current gallery_item caption"
+  tag 'gallery_item:caption' do |tag|
+    gallery_item = tag.locals.gallery_item
+    html_escape gallery_item.asset.caption ? gallery_item.asset.caption : ""
   end
 
   # gallery_item:image  
@@ -78,10 +89,12 @@ module GalleryTags
   tag 'gallery_item:image' do |tag|
 	  attr = tag.attr.symbolize_keys
     gallery_item = tag.locals.gallery_item
+    item_title   = html_escape(gallery_item.asset.title ? gallery_item.asset.title : "")
+    item_caption = html_escape(gallery_item.asset.caption ? gallery_item.asset.caption : "")
     unless attr[:size] == nil
-      %{<img src="#{gallery_item.asset.thumbnail(attr[:size])}" alt="#{gallery_item.asset.caption}" class=""  />}
+      %{<img src="#{gallery_item.asset.thumbnail(attr[:size])}" alt="#{item_title}" title="#{item_caption}" />}
     else
-      %{<img src="#{gallery_item.asset.thumbnail}" alt="#{gallery_item.asset.caption}" class=""  />}
+      %{<img src="#{gallery_item.asset.thumbnail}" alt="#{item_title}" title="#{item_caption}" />}
     end
   end
   
