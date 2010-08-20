@@ -2,7 +2,7 @@ h1. Asset Gallery
 
 This extension allows you to create galleries of Paperclipped Assets. Provides an admin interface to add, sort and remove assets from a Gallery with drag and drop, and radius tags to easily include the Galleries in your site.
 
-("sbmsuite":http://github.com/sbmsuite) modified the views from zapnap/radiant-flash-gallery-extension to use in the new extension. However THIS IS NOT A FORK. It is a newly created extension. "jfqd":http://github.com/jfqd modified the extension to support ujs drag and drop and globalize2-paperclipped compatibility.
+"sbmsuite":http://github.com/sbmsuite modified the views from zapnap/radiant-flash-gallery-extension to use in the new extension. However THIS IS NOT A FORK. It is a newly created extension. "jfqd":http://github.com/jfqd modified the extension to support ujs drag and drop and globalize2-paperclipped compatibility.
 
 Tested with radiant 0.9.1
 
@@ -56,10 +56,12 @@ h3. Images of a gallery with caption
 
 h2. Compatibility
 
-This extension is compatible with the "Globalize2-Paperclipped Extension":http://github.com/Aissac/radiant-globalize2-paperclipped-extension. You need to install the Globalize2-Paperclipped Extension before the Asset Gallery Extension.
+This extension is compatible with the "Globalize2-Paperclipped Extension":http://github.com/Aissac/radiant-globalize2-paperclipped-extension. You need to install the Globalize2-Paperclipped Extension before the Asset Gallery Extension. Please read the installation information about the Globalize2-Paperclipped Extension in the "Readme":http://github.com/Aissac/radiant-globalize2-paperclipped-extension/blob/master/readme.md.
 
 <pre>
 git clone http://github.com/Aissac/radiant-globalize2-paperclipped-extension.git vendor/extensions/globalize2_paperclipped
+rake radiant:extensions:globalize2_paperclipped:migrate
+rake radiant:extensions:globalize2_paperclipped:update
 </pre>
 
 Be careful about the extensions load order:
