@@ -11,7 +11,7 @@ h2. Installation
 Install the "Paperclipped Extension":http://github.com/kbingman/paperclipped/ before the Asset Gallery Extension:
 
 <pre>
-git clone http://github.com/kbingman/paperclipped.git vendor/extensions/paperclipped
+git clone git://github.com/kbingman/paperclipped.git vendor/extensions/paperclipped
   
 rake production db:migrate:extensions
 rake production radiant:extensions:paperclipped:update
@@ -20,7 +20,7 @@ rake production radiant:extensions:paperclipped:update
 Now install the Asset Gallery Extension:
 
 <pre>
-git clone http://github.com/jfqd/radiant-asset_gallery-extension vendor/extensions/asset_gallery
+git clone git://github.com/jfqd/radiant-asset_gallery-extension vendor/extensions/asset_gallery
   
 rake production db:migrate:extensions
 rake production radiant:extensions:asset_gallery:update
@@ -59,7 +59,7 @@ h2. Compatibility
 This extension is compatible with the "Globalize2-Paperclipped Extension":http://github.com/Aissac/radiant-globalize2-paperclipped-extension. You need to install the Globalize2-Paperclipped Extension before the Asset Gallery Extension. Please read the installation information about the Globalize2-Paperclipped Extension in the "Readme":http://github.com/Aissac/radiant-globalize2-paperclipped-extension/blob/master/readme.md.
 
 <pre>
-git clone http://github.com/Aissac/radiant-globalize2-paperclipped-extension.git vendor/extensions/globalize2_paperclipped
+git clone git://github.com/Aissac/radiant-globalize2-paperclipped-extension.git vendor/extensions/globalize2_paperclipped
 rake radiant:extensions:globalize2_paperclipped:migrate
 rake radiant:extensions:globalize2_paperclipped:update
 </pre>
