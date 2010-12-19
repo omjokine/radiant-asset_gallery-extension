@@ -107,9 +107,9 @@ module GalleryTags
     item_title   = html_escape(gallery_item.asset.title ? gallery_item.asset.title : "")
     item_caption = html_escape(gallery_item.asset.caption ? gallery_item.asset.caption : "")
     unless attr[:size] == nil
-      %{"#{gallery_item.asset.thumbnail(attr[:size])}"}
+      %{#{gallery_item.asset.thumbnail(attr[:size])}}
     else
-      %{"#{gallery_item.asset.thumbnail}"}
+      %{#{gallery_item.asset.thumbnail}}
     end
   end
   
