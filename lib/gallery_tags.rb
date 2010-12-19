@@ -102,10 +102,8 @@ module GalleryTags
   #----------------------------------------------------------------------------
   desc "Current gallery_item image url optionally takes 'size' attribute"
   tag 'gallery_item:image_url' do |tag|
-	  attr = tag.attr.symbolize_keys
+    attr = tag.attr.symbolize_keys
     gallery_item = tag.locals.gallery_item
-    item_title   = html_escape(gallery_item.asset.title ? gallery_item.asset.title : "")
-    item_caption = html_escape(gallery_item.asset.caption ? gallery_item.asset.caption : "")
     unless attr[:size] == nil
       %{#{gallery_item.asset.thumbnail(attr[:size])}}
     else
